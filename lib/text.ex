@@ -1,5 +1,4 @@
 defmodule TextAnalyzer.Text do
-
   alias TextAnalyzer.FileAdapter
   alias TextAnalyzer.Word
 
@@ -33,34 +32,34 @@ defmodule TextAnalyzer.Text do
 
   def parse_roots(list) do
     list
-    |> Enum.map(fn(word)->
+    |> Enum.map(fn word ->
       Word.stem_word(word)
     end)
   end
 
   def filter_out(list, stopwords) do
     list
-    |> Enum.filter(fn(word)->
-      !Enum.any?(stopwords, fn(stopword)-> stopword === word end)
+    |> Enum.filter(fn word ->
+      !Enum.any?(stopwords, fn stopword -> stopword === word end)
     end)
   end
 
   def count_words(list) do
     list
-    |> Enum.reduce(%{}, fn(cur, acc)->
+    |> Enum.reduce(%{}, fn cur, acc ->
       Map.update(acc, cur, 1, &(&1 + 1))
     end)
-    |> Enum.sort(fn({_k1, v1}, {_k2, v2})-> v1 > v2 end)
+    |> Enum.sort(fn {_k1, v1}, {_k2, v2} -> v1 > v2 end)
   end
 
   def limit_words(list, amount), do: Enum.take(list, amount)
 
   def format_file_content(content) do
-    Enum.map(content, fn(tuple)->
-      elem(tuple, 0)
-      <> ": "
-      <> Integer.to_string(elem(tuple, 1))
-      <> "\n"
+    Enum.map(content, fn tuple ->
+      elem(tuple, 0) <>
+        ": " <>
+        Integer.to_string(elem(tuple, 1)) <>
+        "\n"
     end)
   end
 
@@ -73,6 +72,7 @@ defmodule TextAnalyzer.Text do
     results =
       ~r/(?<filename>\w+).(?<extension>\w{2,4})$/i
       |> Regex.named_captures(read_path)
+
     results["filename"]
   end
 end

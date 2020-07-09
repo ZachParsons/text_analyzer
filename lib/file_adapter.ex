@@ -11,19 +11,18 @@ defmodule TextAnalyzer.FileAdapter do
 
   def write(content, filename) do
     # _ =
-      @write_path
-      |> File.exists?()
-      |> ensure_directory()
+    @write_path
+    |> File.exists?()
+    |> ensure_directory()
 
-      set_filepath(@write_path, filename)
-      |> File.write(content)
+    set_filepath(@write_path, filename)
+    |> File.write(content)
 
-      content
+    content
   end
 
   def set_filepath(path, filename), do: path <> filename <> ".txt"
 
   def ensure_directory(false), do: File.mkdir(@write_path)
   def ensure_directory(true), do: nil
-
 end

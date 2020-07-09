@@ -48,11 +48,11 @@ defmodule TextAnalyzerWordTest do
   test "concat_with_or/2" do
     suffix1 = "L"
     result1 = Word.concat_with_or("", suffix1)
-    assert result1  == "L"
+    assert result1 == "L"
 
     suffix2 = "LZ"
     result2 = Word.concat_with_or("L", suffix2)
-    assert result2  == "L|LZ"
+    assert result2 == "L|LZ"
   end
 
   test "get_removed_root/2" do
@@ -78,5 +78,4 @@ defmodule TextAnalyzerWordTest do
     result2 = Word.handle_result(root2, word2)
     assert result2 == root2
   end
-
 end
