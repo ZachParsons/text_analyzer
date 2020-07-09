@@ -62,4 +62,14 @@ defmodule AnalyzerTextTest do
       assert result == ["ABC", "GHI"]
   end
 
+  test "count_words/1" do
+    words = ["ABC", "DEF", "DEF", "GHI", "GHI", "GHI"]
+    result = Text.count_words(words)
+    assert result == [
+                        {"GHI", 3},
+                        {"DEF", 2},
+                        {"ABC", 1}
+                      ]
+  end
+
 end

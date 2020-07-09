@@ -18,6 +18,7 @@ defmodule TextAnalyzer.Text do
     |> read_words()
     |> parse_roots()
     |> filter_out(stopwords)
+    |> count_words()
 
   end
 
@@ -42,6 +43,14 @@ defmodule TextAnalyzer.Text do
     |> Enum.filter(fn(word)->
       !Enum.any?(stopwords, fn(stopword)-> stopword === word end)
     end)
+  end
+
+  def count_words(list) do
+    list
+    |> Enum.reduce(%{}, fn(cur, acc)->
+      Map.update(acc, cur, 1, &(&1 + 1))
+    end)
+    |> Enum.sort(fn({_k1, v1}, {_k2, v2})-> v1 > v2 end)
   end
 
 end
