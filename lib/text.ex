@@ -23,5 +23,10 @@ defmodule TextAnalyzer.Text do
     String.split(words, @regex_delimiter, trim: true)
   end
 
-
+  def parse_roots(list) do
+    list
+    |> Enum.map(fn(word)->
+      Word.stem_word(word)
+    end)
+  end
 end
