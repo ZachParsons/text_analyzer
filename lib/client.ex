@@ -1,4 +1,18 @@
 defmodule TextAnalyzer.Client do
+  @moduledoc """
+    This module runs the Client UI, a CLI dialog, that the user can input files for analysis & reporting.
+
+    TODO:
+    Dialzyer, entity types (value types) & structs (default values):
+    Error handling, Logger success/failure messaging.
+
+    Refactor options:
+    1. Stream module, Flow lib. Intented for large data; lazy processing, parallelization.
+    2. Leex Lexer, Yecc Parser; leverage BEAM patterm matching.
+    3. C NIFs; faster computation.
+    4. bash wc; system/env BIFs worth comparative benchmarking.
+
+  """
 
   alias TextAnalyzer.Text
 
