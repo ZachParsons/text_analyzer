@@ -14,6 +14,7 @@ defmodule TextAnalyzer.Text do
     IO.inspect("ran")
 
     stopwords = read_words(@stopwords_path)
+    filename = get_filename(@read_path)
 
     @read_path
     |> read_words()
@@ -22,8 +23,7 @@ defmodule TextAnalyzer.Text do
     |> count_words()
     |> limit_words(@amount)
     |> format_file_content()
-
-
+    |> write_file(filename)
   end
 
   def read_words(path) do
@@ -68,4 +68,15 @@ defmodule TextAnalyzer.Text do
     end)
   end
 
+  def write_file(content, filename) do
+    FileAdapter.write(content, filename)
+    content
+  end
+
+  def get_filename(read_path) do
+    results =
+      ~r/(?<filename>\w+).(?<extension>\w{2,4})$/i
+      |> Regex.named_captures(read_path)
+    results["filename"]
+  end
 end

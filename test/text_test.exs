@@ -87,4 +87,9 @@ defmodule AnalyzerTextTest do
     assert result == ["ABC: 1\n", "DEF: 2\n"]
   end
 
+  test "get_filename/1" do
+    path = "./data/test/document.txt"
+    result = Text.get_filename(path)
+    assert result == "document"
+  end
 end
