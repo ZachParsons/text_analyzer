@@ -11,6 +11,42 @@ defmodule AnalyzerTextTest do
       result = Text.parse_words(spaces)
       assert result == @correctly_split
     end
+    
+    test "excludes commas" do
+      commas = "ABC DEF, GHI JKL"
+      result = Text.parse_words(commas)
+      assert result == @correctly_split
+    end
+
+    test "excludes periods" do
+      periods = "ABC DEF. GHI JKL"
+      result = Text.parse_words(periods)
+      assert result == @correctly_split
+    end
+
+    test "excludes colons" do
+      colons = "ABC DEF: GHI JKL"
+      result = Text.parse_words(colons)
+      assert result == @correctly_split
+    end
+
+    test "excludes semicolons" do
+      semicolons = "ABC DEF; GHI JKL"
+      result = Text.parse_words(semicolons)
+      assert result == @correctly_split
+    end
+
+    test "includes hyphenated words" do
+      hyphens =  "ABC DEF-GHI JKL"
+      result = Text.parse_words(hyphens)
+      assert result == ["ABC", "DEF-GHI", "JKL"]
+    end
+
+    test "excludes numbers" do
+      numbers = "ABC 1 1000000 1,000 1,000,000,000 DEF"
+      result = Text.parse_words(numbers)
+      assert result == ["ABC", "DEF"]
+    end
   end
 
 
