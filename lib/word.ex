@@ -12,6 +12,7 @@ defmodule TextAnalyzer.Word do
   def stem_word(word) do
     word
     |> add_suffixes()
+    |> remove_suffixes()
   end
 
 
@@ -28,4 +29,24 @@ defmodule TextAnalyzer.Word do
   def get_added_root(found, _acc, new_suffix), do: found["root"] <> new_suffix
 
 
+  def remove_suffixes(word) do
+    stemmer = create_stemmer(@suffixes)
+
+    Regex.named_captures(stemmer, word)
+    |> get_removed_root(word)
+  end
+
+  def create_stemmer(list) do
+    or_suffixes =
+      list
+      |> Enum.reduce("", fn(cur, acc)-> concat_with_or(acc, cur) end)
+
+    ~r/(?<root>^\w+)(?<suffix>#{or_suffixes})$/i
+  end
+
+  def concat_with_or("", cur), do: cur
+  def concat_with_or(acc, cur), do: acc <> "|" <> cur
+
+  def get_removed_root(nil, word), do: word
+  def get_removed_root(found, _word), do: found["root"]
 end

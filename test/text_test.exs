@@ -50,9 +50,9 @@ defmodule AnalyzerTextTest do
   end
 
   test "parse_roots/1" do
-    words = ["MNOEZL", "PQRPZL"]
+    words = ["ABCL", "DEFLZ", "GHIEVM", "JKLZQ", "MNOEZL", "PQRPZL"]
     result = Text.parse_roots(words)
-    assert result == ["MNOR", "PQRAZ"]
+    assert result == ["ABC", "DEF", "GHI", "JKL", "MNOR", "PQRAZ"]
   end
 
   test "filter_out/2" do

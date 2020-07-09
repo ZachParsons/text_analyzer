@@ -24,4 +24,14 @@ defmodule TextAnalyzerWordTest do
     assert result2 == regex2["root"] <> suffix2
   end
 
+  test "remove_suffixes/1" do
+    result1 = Word.remove_suffixes("ABCL")
+    assert result1 == "ABC"
+    result2 = Word.remove_suffixes("ABCLZ")
+    assert result2 == "ABC"
+    result3 = Word.remove_suffixes("ABCEVM")
+    assert result3 == "ABC"
+    result4 = Word.remove_suffixes("ABCZQ")
+    assert result4 == "ABC"
+  end
 end
