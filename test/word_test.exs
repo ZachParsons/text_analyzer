@@ -3,6 +3,16 @@ defmodule TextAnalyzerWordTest do
   doctest TextAnalyzer.Word
   alias TextAnalyzer.Word
 
+  test "stem_word/1" do
+    assert Word.stem_word("ABC") == "ABC"
+    assert Word.stem_word("ABCL") == "ABC"
+    assert Word.stem_word("ABCLZ") == "ABC"
+    assert Word.stem_word("ABCEVM") == "ABC"
+    assert Word.stem_word("ABCZQ") == "ABC"
+    assert Word.stem_word("ABCEZL") == "ABCR"
+    assert Word.stem_word("ABCPZL") == "ABCAZ"
+  end
+
   test "add_suffixes/1" do
     result1 = Word.add_suffixes("ABCEZL")
     assert result1 == "ABCR"
