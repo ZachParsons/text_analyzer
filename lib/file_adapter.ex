@@ -1,4 +1,4 @@
-defmodule Analyzer.FileAdapter do
+defmodule TextAnalyzer.FileAdapter do
 
   def read(path) do
     {:ok, pid} = File.open(path, [:read])
