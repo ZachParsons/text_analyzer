@@ -15,7 +15,6 @@ defmodule TextAnalyzer.Word do
     |> remove_suffixes()
   end
 
-
   def add_suffixes(word) do
     @root_additions
     |> Enum.reduce(word, fn({k, v}), acc ->
@@ -49,4 +48,7 @@ defmodule TextAnalyzer.Word do
 
   def get_removed_root(nil, word), do: word
   def get_removed_root(found, _word), do: found["root"]
+
+  def handle_result("", word), do: word
+  def handle_result(root, _word), do: root
 end

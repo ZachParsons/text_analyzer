@@ -57,4 +57,16 @@ defmodule TextAnalyzerWordTest do
     assert result2 == root2["root"]
   end
 
+  test "handle_result/2" do
+    root1 = ""
+    word1 = "ABC"
+    result1 = Word.handle_result(root1, word1)
+    assert result1 == word1
+
+    root2 = "DEF"
+    word2 = "GHI"
+    result2 = Word.handle_result(root2, word2)
+    assert result2 == root2
+  end
+
 end
