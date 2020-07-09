@@ -7,6 +7,7 @@ defmodule TextAnalyzer.Text do
   @read_path "./data/exercisedocument.txt"
   @stopwords_path "./data/stopwords.txt"
   @regex_delimiter ~r/[\d*,?.?:?;?\s+\d*]/i
+  @amount 25
 
 
   def run do
@@ -19,6 +20,7 @@ defmodule TextAnalyzer.Text do
     |> parse_roots()
     |> filter_out(stopwords)
     |> count_words()
+    |> limit_words(@amount)
 
   end
 
@@ -52,5 +54,7 @@ defmodule TextAnalyzer.Text do
     end)
     |> Enum.sort(fn({_k1, v1}, {_k2, v2})-> v1 > v2 end)
   end
+
+  def limit_words(list, amount), do: Enum.take(list, amount)
 
 end

@@ -72,4 +72,12 @@ defmodule AnalyzerTextTest do
                       ]
   end
 
+  test "limit_words" do
+    words = [ {"GHI", 3}, {"DEF", 2}, {"ABC", 1} ]
+    result = Text.limit_words(words, 2)
+    assert result == [
+                        {"GHI", 3},
+                        {"DEF", 2}
+                      ]
+  end
 end

@@ -34,4 +34,27 @@ defmodule TextAnalyzerWordTest do
     result4 = Word.remove_suffixes("ABCZQ")
     assert result4 == "ABC"
   end
+
+  test "concat_with_or/2" do
+    suffix1 = "L"
+    result1 = Word.concat_with_or("", suffix1)
+    assert result1  == "L"
+
+    suffix2 = "LZ"
+    result2 = Word.concat_with_or("L", suffix2)
+    assert result2  == "L|LZ"
+  end
+
+  test "get_removed_root/2" do
+    root1 = nil
+    word1 = "ABC"
+    result1 = Word.get_removed_root(root1, word1)
+    assert result1 == word1
+
+    root2 = %{"root" => "DEF"}
+    word2 = "GHU"
+    result2 = Word.get_removed_root(root2, word2)
+    assert result2 == root2["root"]
+  end
+
 end
