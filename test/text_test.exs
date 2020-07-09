@@ -11,7 +11,7 @@ defmodule AnalyzerTextTest do
       result = Text.parse_words(spaces)
       assert result == @correctly_split
     end
-    
+
     test "excludes commas" do
       commas = "ABC DEF, GHI JKL"
       result = Text.parse_words(commas)
@@ -49,5 +49,17 @@ defmodule AnalyzerTextTest do
     end
   end
 
+  test "parse_roots/1" do
+    words = ["MNOEZL", "PQRPZL"]
+    result = Text.parse_roots(words)
+    assert result == ["MNOR", "PQRAZ"]
+  end
+
+  test "filter_out/2" do
+      words = ["ABC", "DEF", "GHI"]
+      stopwords = ["DEF"]
+      result = Text.filter_out(words, stopwords)
+      assert result == ["ABC", "GHI"]
+  end
 
 end

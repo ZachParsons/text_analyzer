@@ -12,8 +12,13 @@ defmodule TextAnalyzer.Text do
   def run do
     IO.inspect("ran")
 
+    stopwords = read_words(@stopwords_path)
+
     @read_path
     |> read_words()
+    |> parse_roots()
+    |> filter_out(stopwords)
+
   end
 
   def read_words(path) do
@@ -31,4 +36,12 @@ defmodule TextAnalyzer.Text do
       Word.stem_word(word)
     end)
   end
+
+  def filter_out(list, stopwords) do
+    list
+    |> Enum.filter(fn(word)->
+      !Enum.any?(stopwords, fn(stopword)-> stopword === word end)
+    end)
+  end
+
 end
