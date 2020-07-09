@@ -1,6 +1,8 @@
 defmodule TextAnalyzer.Text do
 
   alias TextAnalyzer.FileAdapter
+  alias TextAnalyzer.Word
+
 
   @read_path "./data/exercisedocument.txt"
   @stopwords_path "./data/stopwords.txt"
