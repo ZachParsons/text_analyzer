@@ -3,20 +3,16 @@ defmodule TextAnalyzer.Text do
   alias TextAnalyzer.FileAdapter
   alias TextAnalyzer.Word
 
-
-  @read_path "./data/exercisedocument.txt"
+  # @read_path "./data/exercisedocument.txt"
   @stopwords_path "./data/stopwords.txt"
   @regex_delimiter ~r/[\d*,?.?:?;?\s+\d*]/i
   @amount 25
 
-
-  def run do
-    IO.inspect("ran")
-
+  def run(path) do
     stopwords = read_words(@stopwords_path)
-    filename = get_filename(@read_path)
+    filename = get_filename(path)
 
-    @read_path
+    path
     |> read_words()
     |> parse_roots()
     |> filter_out(stopwords)
