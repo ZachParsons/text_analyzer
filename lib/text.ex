@@ -21,6 +21,8 @@ defmodule TextAnalyzer.Text do
     |> filter_out(stopwords)
     |> count_words()
     |> limit_words(@amount)
+    |> format_file_content()
+
 
   end
 
@@ -56,5 +58,14 @@ defmodule TextAnalyzer.Text do
   end
 
   def limit_words(list, amount), do: Enum.take(list, amount)
+
+  def format_file_content(content) do
+    Enum.map(content, fn(tuple)->
+      elem(tuple, 0)
+      <> ": "
+      <> Integer.to_string(elem(tuple, 1))
+      <> "\n"
+    end)
+  end
 
 end

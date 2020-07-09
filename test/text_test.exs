@@ -80,4 +80,11 @@ defmodule AnalyzerTextTest do
                         {"DEF", 2}
                       ]
   end
+
+  test "format_file_content/1" do
+    content = [{"ABC", 1}, {"DEF", 2}]
+    result = Text.format_file_content(content)
+    assert result == ["ABC: 1\n", "DEF: 2\n"]
+  end
+
 end
