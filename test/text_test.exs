@@ -37,7 +37,7 @@ defmodule AnalyzerTextTest do
     end
 
     test "includes hyphenated words" do
-      hyphens =  "ABC DEF-GHI JKL"
+      hyphens = "ABC DEF-GHI JKL"
       result = Text.parse_words(hyphens)
       assert result == ["ABC", "DEF-GHI", "JKL"]
     end
@@ -56,29 +56,31 @@ defmodule AnalyzerTextTest do
   end
 
   test "filter_out/2" do
-      words = ["ABC", "DEF", "GHI"]
-      stopwords = ["DEF"]
-      result = Text.filter_out(words, stopwords)
-      assert result == ["ABC", "GHI"]
+    words = ["ABC", "DEF", "GHI"]
+    stopwords = ["DEF"]
+    result = Text.filter_out(words, stopwords)
+    assert result == ["ABC", "GHI"]
   end
 
   test "count_words/1" do
     words = ["ABC", "DEF", "DEF", "GHI", "GHI", "GHI"]
     result = Text.count_words(words)
+
     assert result == [
-                        {"GHI", 3},
-                        {"DEF", 2},
-                        {"ABC", 1}
-                      ]
+             {"GHI", 3},
+             {"DEF", 2},
+             {"ABC", 1}
+           ]
   end
 
   test "limit_words" do
-    words = [ {"GHI", 3}, {"DEF", 2}, {"ABC", 1} ]
+    words = [{"GHI", 3}, {"DEF", 2}, {"ABC", 1}]
     result = Text.limit_words(words, 2)
+
     assert result == [
-                        {"GHI", 3},
-                        {"DEF", 2}
-                      ]
+             {"GHI", 3},
+             {"DEF", 2}
+           ]
   end
 
   test "format_file_content/1" do

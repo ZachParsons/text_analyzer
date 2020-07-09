@@ -1,6 +1,6 @@
 defmodule TextAnalyzer.Word do
   @moduledoc """
-    """
+  """
 
   @suffixes ["L", "LZ", "EVM", "ZQ"]
 
@@ -17,7 +17,7 @@ defmodule TextAnalyzer.Word do
 
   def add_suffixes(word) do
     @root_additions
-    |> Enum.reduce(word, fn({k, v}), acc ->
+    |> Enum.reduce(word, fn {k, v}, acc ->
       ~r/(?<root>^\w+)(?<suffix>#{k})$/i
       |> Regex.named_captures(word)
       |> get_added_root(acc, v)
@@ -26,7 +26,6 @@ defmodule TextAnalyzer.Word do
 
   def get_added_root(nil, acc, _new_suffix), do: acc
   def get_added_root(found, _acc, new_suffix), do: found["root"] <> new_suffix
-
 
   def remove_suffixes(word) do
     stemmer = create_stemmer(@suffixes)
@@ -38,7 +37,7 @@ defmodule TextAnalyzer.Word do
   def create_stemmer(list) do
     or_suffixes =
       list
-      |> Enum.reduce("", fn(cur, acc)-> concat_with_or(acc, cur) end)
+      |> Enum.reduce("", fn cur, acc -> concat_with_or(acc, cur) end)
 
     ~r/(?<root>^\w+)(?<suffix>#{or_suffixes})$/i
   end

@@ -25,17 +25,17 @@ defmodule TextAnalyzer.Client do
 
     analyze(path)
     |> print_report()
-
   end
 
-  defp greeting, do: IO.puts "Welcome to the CLI Text Analyzer"
+  defp greeting, do: IO.puts("Welcome to the CLI Text Analyzer")
+
   defp prompt do
     "Please enter the filepath of the document you want to analyze.\n"
   end
 
   def receive_input(message, io) do
     io.gets(message)
-    |> String.trim
+    |> String.trim()
   end
 
   def analyze(path) do
@@ -43,7 +43,7 @@ defmodule TextAnalyzer.Client do
   end
 
   defp print_report(report) do
-    IO.puts "Here are the 25 most frequent words in the document with their word count:\n"
-    IO.puts report
+    IO.puts("Here are the 25 most frequent words in the document with their word count:\n")
+    IO.puts(report)
   end
 end
